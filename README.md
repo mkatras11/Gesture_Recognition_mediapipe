@@ -12,7 +12,7 @@ This repository contains the following contents.
 
 # Requirements
 To install all the requirements run:
-$ pip install -r requirements.txt
+'$ pip install -r requirements.txt'
 
 ### app.py
 This is a sample program for inference.<br>
