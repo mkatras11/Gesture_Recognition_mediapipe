@@ -10,7 +10,7 @@ This repository contains the following contents.
 * Learning data for hand sign recognition and notebook for learning
 * Learning data for finger gesture recognition and notebook for learning
 
-# Requirements
+### Requirements
 To install all the requirements run:
 '$ pip install -r requirements.txt'
 
