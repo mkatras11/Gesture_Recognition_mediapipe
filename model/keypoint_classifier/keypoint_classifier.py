@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# import libraries
 import numpy as np
 import tensorflow as tf
 

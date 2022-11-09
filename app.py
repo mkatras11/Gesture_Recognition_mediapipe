@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# Import Libraries
 import csv
 import copy
 import argparse
