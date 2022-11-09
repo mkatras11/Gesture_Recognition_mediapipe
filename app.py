@@ -493,21 +493,20 @@ def draw_bounding_rect(use_brect, image, brect):
 
 def draw_info_text(image, brect, handedness, hand_sign_text,
                    finger_gesture_text):
-    cv.rectangle(image, (brect[0] - 100, brect[1]), (brect[2] + 80, brect[1] - 100),
-                 (0, 0, 0), -1)
 
     info_text = handedness.classification[0].label[0:]
     if hand_sign_text != "":
         info_text = info_text + ':' + hand_sign_text
-    cv.putText(image, info_text, (brect[0] - 80, brect[1] - 20),
-               cv.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 3, cv.LINE_AA)
-
+    cv.putText(image, info_text, (brect[0], brect[1] - 30),
+               cv.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 10, cv.LINE_AA)
+    cv.putText(image, info_text, (brect[0], brect[1] - 30),
+               cv.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2, cv.LINE_AA)
     if hand_sign_text == "Point":
         if finger_gesture_text != "":
-            cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 80),
-                    cv.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 0), 6, cv.LINE_AA)
-            cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 80),
-                    cv.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 3,
+            cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 120),
+                    cv.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 10, cv.LINE_AA)
+            cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 120),
+                    cv.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2,
                     cv.LINE_AA)
 
     return image
@@ -517,16 +516,16 @@ def draw_point_history(image, point_history):
     for index, point in enumerate(point_history):
         if point[0] != 0 and point[1] != 0:
             cv.circle(image, (point[0], point[1]), 1 + int(index / 2),
-                      (152, 251, 152), 10)
+                      (0, 0, 255), 10)
 
     return image
 
 
 def draw_info(image, fps, mode, number):
-    cv.putText(image, "FPS:" + str(fps), (10, 30), cv.FONT_HERSHEY_SIMPLEX,
-               1.0, (0, 0, 0), 4, cv.LINE_AA)
-    cv.putText(image, "FPS:" + str(fps), (10, 30), cv.FONT_HERSHEY_SIMPLEX,
-               1.0, (255, 255, 255), 2, cv.LINE_AA)
+    cv.putText(image, "FPS:" + str(fps), (10, 60), cv.FONT_HERSHEY_SIMPLEX,
+               2, (0, 0, 0), 10, cv.LINE_AA)
+    cv.putText(image, "FPS:" + str(fps), (10, 60), cv.FONT_HERSHEY_SIMPLEX,
+               2, (255, 255, 255), 2, cv.LINE_AA)
 
     mode_string = ['Logging Key Point', 'Logging Point History']
     if 1 <= mode <= 2:
