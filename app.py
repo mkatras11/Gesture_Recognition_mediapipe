@@ -14,14 +14,15 @@ import mediapipe as mp
 from utils import CvFpsCalc
 from model import KeyPointClassifier
 from model import PointHistoryClassifier
-
+from tkinter import * 
+from tkinter.ttk import *
 
 def get_args():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--device", type=int, default=0)
-    parser.add_argument("--width", help='cap width', type=int, default=960)
-    parser.add_argument("--height", help='cap height', type=int, default=540)
+    parser.add_argument("--width", help='cap width', type=int, default= Tk().winfo_screenwidth())
+    parser.add_argument("--height", help='cap height', type=int, default= Tk().winfo_screenheight())
 
     parser.add_argument('--use_static_image_mode', action='store_true')
     parser.add_argument("--min_detection_confidence",
@@ -56,7 +57,7 @@ def main():
     cap = cv.VideoCapture(cap_device)
     cap.set(cv.CAP_PROP_FRAME_WIDTH, cap_width)
     cap.set(cv.CAP_PROP_FRAME_HEIGHT, cap_height)
-
+   
     # Model load #############################################################
     mp_hands = mp.solutions.hands
     hands = mp_hands.Hands(
@@ -160,7 +161,7 @@ def main():
 
                 # Drawing part
                 debug_image = draw_bounding_rect(use_brect, debug_image, brect)
-                #debug_image = draw_landmarks(debug_image, landmark_list) # Skeleton display
+                debug_image = draw_landmarks(debug_image, landmark_list) # Skeleton display
                 debug_image = draw_info_text(
                     debug_image,
                     brect,
@@ -486,28 +487,28 @@ def draw_bounding_rect(use_brect, image, brect):
     if use_brect:
         # Outer rectangle
         cv.rectangle(image, (brect[0], brect[1]), (brect[2], brect[3]),
-                     (0, 0, 0), 1)
+                     (0, 0, 0), 2)
 
     return image
 
 
 def draw_info_text(image, brect, handedness, hand_sign_text,
                    finger_gesture_text):
-    cv.rectangle(image, (brect[0], brect[1]), (brect[2], brect[1] - 22),
+    cv.rectangle(image, (brect[0] - 100, brect[1]), (brect[2] + 80, brect[1] - 100),
                  (0, 0, 0), -1)
 
     info_text = handedness.classification[0].label[0:]
     if hand_sign_text != "":
         info_text = info_text + ':' + hand_sign_text
-    cv.putText(image, info_text, (brect[0] + 5, brect[1] - 4),
-               cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1, cv.LINE_AA)
+    cv.putText(image, info_text, (brect[0] - 80, brect[1] - 20),
+               cv.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 3, cv.LINE_AA)
 
     if hand_sign_text == "Point":
         if finger_gesture_text != "":
-            cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 60),
-                    cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 0), 4, cv.LINE_AA)
-            cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 60),
-                    cv.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2,
+            cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 80),
+                    cv.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 0), 6, cv.LINE_AA)
+            cv.putText(image, "Finger Gesture:" + finger_gesture_text, (10, 80),
+                    cv.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 3,
                     cv.LINE_AA)
 
     return image
@@ -517,7 +518,7 @@ def draw_point_history(image, point_history):
     for index, point in enumerate(point_history):
         if point[0] != 0 and point[1] != 0:
             cv.circle(image, (point[0], point[1]), 1 + int(index / 2),
-                      (152, 251, 152), 2)
+                      (152, 251, 152), 10)
 
     return image
 
