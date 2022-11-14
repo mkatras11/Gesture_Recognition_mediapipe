@@ -112,6 +112,8 @@ def main():
         if not ret:
             break
         image = cv.flip(image, 1)  # Mirror display
+        # resize image
+        image = cv.resize(image, (cap_width, cap_height))
         debug_image = copy.deepcopy(image)
 
         # Detection implementation #############################################################
@@ -521,9 +523,9 @@ def draw_point_history(image, point_history):
 
 
 def draw_info(image, fps, mode, number):
-    cv.putText(image, "FPS:" + str(fps), (10, 710), cv.FONT_HERSHEY_SIMPLEX,
+    cv.putText(image, "FPS:" + str(fps), (10, 1160), cv.FONT_HERSHEY_SIMPLEX,
                1, (0, 0, 0), 5, cv.LINE_AA)
-    cv.putText(image, "FPS:" + str(fps), (10, 710), cv.FONT_HERSHEY_SIMPLEX,
+    cv.putText(image, "FPS:" + str(fps), (10, 1160), cv.FONT_HERSHEY_SIMPLEX,
                1, (255, 255, 255), 1, cv.LINE_AA)
 
     mode_string = ['Logging Key Point', 'Logging Point History']
