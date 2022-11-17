@@ -1,4 +1,4 @@
-# Gesture-Recognition-using-mediapipe
+# Gesture Recognition using hand pose estimation
 Estimate hand pose using MediaPipe (Python version).<br> Recognize hand signs and finger gestures with a MLP using the detected key points.
 <br> ❗ _️**This repository is based on this [original repo](https://github.com/Lugixion/hand-gesture-recognition-mediapipe).**_ ❗<br> 
 
@@ -43,16 +43,15 @@ The following files are stored.
 This is a module for FPS measurement.
 
 # Training
-Hand gesture recognition and finger gesture recognition can add and change training data and retrain the model.
+There is also a feature to add and change training data and retrain the models for hand and finger gesture recognition.
 
 ### Hand gesture recognition training
 #### 1.Learning data collection
 Press "k" to enter the mode to save key points（displayed as 「MODE:Logging Key Point」）<br>
 If you press "0" to "9", the key points will be added to "model/keypoint_classifier/keypoint.csv" in the following structure:<br>
 1st column: Pressed number (used as class ID), 2nd and subsequent columns: Key point coordinates<br>
-The key point coordinates are the ones that have undergone the following preprocessing up to ④.<br>
 In the initial state, three types of gestures are included: Stop (class ID: 0), Go (class ID: 1), and Point (class ID: 2).<br>
-If necessary, add or delete the existing data and labels of the csv files to prepare the training data.<br>
+If necessary, add or delete the existing data and labels of the csv files to prepare new training data.<br>
 
 #### 2.Model training
 Open "[keypoint_classification.ipynb](keypoint_classification.ipynb)" in Jupyter Notebook and execute from top to bottom.<br>
@@ -63,13 +62,13 @@ To change the number of training data classes, change the value of "NUM_CLASSES 
 Press "h" to enter the mode to save the history of fingertip coordinates (displayed as "MODE:Logging Point History").<br>
 If you press "0" to "9", the key points will be added to "model/point_history_classifier/point_history.csv" in the following structure:<br>
 1st column: Pressed number (used as class ID), 2nd and subsequent columns: Coordinate history<br>
-In the initial state, 3 types of learning data are included: None (class ID: 0), clockwise (class ID: 1), counterclockwise (class ID: 2).<br>
-If necessary, add or delete the existing data and labels of the csv files to prepare the training data.<br>
+In the initial state, 3 types of learning data are included: None (class ID: 0), Clockwise (class ID: 1), Counterclockwise (class ID: 2).<br>
+If necessary, add or delete the existing data and labels of the csv files to prepare new training data.<br>
 
 #### 2.Model training
 Open "[point_history_classification.ipynb](point_history_classification.ipynb)" in Jupyter Notebook and execute from top to bottom.<br>
 To change the number of training data classes, change the value of "NUM_CLASSES = 3" and <br>modify the label of "model/point_history_classifier/point_history_classifier_label.csv". <br><br>
-The user can choose between a simple MLP and an LSTM model for finger gesture recognition.<br>
+The user can choose between a simple MLP and a LSTM model for finger gesture recognition.<br>
 
 # References
 * [MediaPipe](https://mediapipe.dev/)
