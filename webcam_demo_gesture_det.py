@@ -174,6 +174,7 @@ def main():
                 )
         else:
             point_history.append([0, 0])
+            # Calculates the gesture IDs in the latest detection
             image = cv.cvtColor(image, cv.COLOR_RGB2BGR)
             info_text = "Machine State: " + "Detecting"
             cv.putText(image, info_text, (10, 60),
